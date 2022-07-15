@@ -5,7 +5,7 @@ on: [push]
 
 jobs:
   test-lint:
-    name: Test and LInt
+    name: Test and Lint
     runs-on: ubuntu-20.04 #runner will be using to run our job
     steps:
       - name: Login to Docker Hub
@@ -13,9 +13,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Checkout
-          uses: actions/checkout@v2
+        uses: actions/checkout@v2
+
       - name: Test
-          run: docker-compose run --rm app sh -c "python manage.py test"
+        run: docker-compose run --rm app sh -c "python manage.py test"
+
       - name: Lint
-        run: docker-compose run --rm sh -c "flake8"
+        run: docker-compose run --rm app sh -c "flake8"
