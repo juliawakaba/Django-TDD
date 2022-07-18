@@ -20,12 +20,9 @@ class ModelTests(TestCase):
         """Test email is normalized for new users"""
         sample_emails = [
 
-            ['test@EXAMPLE.com','test@example.com'],
-
-            ['test1@EXAMPLE.com','test1@example.com'],
-
+            ['test@EXAMPLE.com', 'test@example.com'],
+            ['test1@EXAMPLE.com', 'test1@example.com'],
             ['test2@example.COM', 'test2@example.com'],
-
         ]
         for email, expected in sample_emails:
             user = get_user_model().objects.create_user(email,'sample123')
