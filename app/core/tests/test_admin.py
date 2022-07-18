@@ -8,11 +8,10 @@ class AdminSiteTests(TestCase):
     """Tests for django admin"""
 
     def setUp(self):
-        """CReate user and client"""
+        """Create user and client"""
         self.client = Client()
         self.admin_user = get_user_model().objects.create_superuser(
-            email = 'admin@example.com',
-            password='testpass123'
+            email = 'admin@example.com', password='testpass123'
         )
         self.client.force_login(self.admin_user)
         self.user = get_user_model().objects.create_user(
@@ -31,7 +30,7 @@ class AdminSiteTests(TestCase):
         self.assertContains(res, self.user.last_name)
         self.assertContains(res, self.user.email)
 
-    def test_edi_user_page(self):
+    def test_edit_user_page(self):
         """Test the edit user page works"""
         url = reverse('admin:core_user_change', args=[self.user.id])
         res = self.client.get(url)
@@ -44,4 +43,3 @@ class AdminSiteTests(TestCase):
         res = self.client.get(url)
 
         self.assertEqual(res.status_code, 200)
-
