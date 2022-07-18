@@ -51,4 +51,3 @@ class UserAdmin(BaseUserAdmin):
                 'is_superuser',),
         }),
     )
-
