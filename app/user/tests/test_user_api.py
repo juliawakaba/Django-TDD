@@ -11,13 +11,17 @@ CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
 CURRENT_AUTHENTICATED_USER_URL = reverse('user:me')
 
+
 def create_user(**params):
     """Create and return new user"""
     return get_user_model().objects.create_user(**params)
 
 
 class PublicUserApiTests(TestCase):
-    """Test the public features of the user API(all unauthenticated requests)"""
+    """
+    Test the public features of the user
+    API(all unauthenticated requests)
+    """
 
     def setUp(self):
         self.client = APIClient()
@@ -107,7 +111,6 @@ class PublicUserApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
 
-
 class PrivateUserApiTests(TestCase):
     """Test the private features of the user API(all authenticated requests)"""
 
@@ -147,6 +150,6 @@ class PrivateUserApiTests(TestCase):
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, payload['first_name'])
         self.assertEqual(self.user.last_name, payload['last_name'])
+
         self.assertTrue(self.user.check_password(payload['password']))
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-
