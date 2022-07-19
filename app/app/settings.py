@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_spectacular',
 
     'core',
+    'user',
 
 ]
 
@@ -138,4 +140,7 @@ AUTH_USER_MODEL = 'core.user'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.BrowsableAPIRenderer',
+        )
 }
